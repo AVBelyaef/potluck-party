@@ -1,0 +1,20 @@
+<!--{{#if isAuth}}-->
+<!--    <a href="/party/new" class="block button w-100 mar-t-2 mar-b-3 pad-2 round-1 text-c center">host a potluck</a>-->
+<!--{{/if}}-->
+
+<main role="main">
+    <ul class="party-list no-bullets no-padding">
+        {{#each party}}
+            <li class="entry-item pad-b-4">
+                <a href="/party/{{id}}" class="entry-title font-2 pad-b-1-4 c-white">{{name}}</a>
+                <span class="entry-date block font-3-4 c-lt-gray"> {{startsAt}}</span>
+                <span class="entry-date block font-3-4 c-lt-gray">at {{location}}</span>
+
+            {{#if ../isAuth }}
+                    <a href="/party/#" class="btn btn-info">let's go</a>
+            {{/if}}
+
+            </li>
+        {{/each}}
+    </ul>
+</main>
