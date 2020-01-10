@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/stylesheets/normalize.css">
-    <link rel="stylesheet" href="/stylesheets/application.css">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script defer src="/js/application.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <title>Potluck Party</title>
 </head>
 <body>
-<header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
-    <div class="max-w-700 center wrap-float">
-        <nav class="clearfix mar-b-1">
-            <ul class="no-bullets no-margin no-padding right">
+<header role="banner" class="container">
+    <div class="">
+        <nav class="d-flex justify-content-end navbar navbar-expand-lg navbar-dark bg-primary">
+            <ul class="navbar-nav">
 
                 {{#if isAuth}}
-                    <li class="pipe-separate t-light-green left" style="color: #2196f3;"> {{userName}}</li>
-                    <li class="pipe-separate t-light-green left"><a style="color: #2196f3;"
-                        href="/party/new">HOST A POTLUCK</a>
-                    <li class="pipe-separate t-light-green left"><a style="color: #2196f3;"
-                                                                    href="/logout">LOGOUT</a>
-
-                    </li>
+                    <li class="nav-item active nav-link"> {{userName}}</li>
+                    <li class="nav-item "><a class="nav-link" href="/party/new">HOST A POTLUCK</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/logout">LOG OUT</a></li>
                 {{else}}
-                    <li class="pipe-separate t-light-green left"><a style="color: #2196f3;"
-                                                                    href="/party/login">LOGIN</a></li>
-                    <li class="pipe-separate t-light-green left"><a style="color: #2196f3;" href="/party/signup">REGISTER</a>
-                    </li>
+                    <li class="nav-item "><a class="nav-link" href="/login">LOG IN</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/signup">SIGN UP</a></li>
                 {{/if}}
 
-                <li class="pipe-separate t-light-green left"><a style="color: #2196f3;" href="/">PARTY</a></li>
+                <li class="nav-item "><a class="nav-link" href="/">PARTY</a></li>
             </ul>
         </nav>
 
-        <div class="logo-container">
-            <img class="logo" src="/images/logo.png" class="center block">
-            <h1>Potluck Party</h1>
+<!--        <div class="text-center" style="border: solid 2px #45b9e1; border-radius: 50%;">-->
+        <div class="text-center">
+            <img class="img-fluid" style="width: 15%;"src="/images/logo.png">
+            <h1 style="font-family: 'Indie Flower', cursive;">Potluck Party</h1>
         </div>
     </div>
 </header>
-<div class="bg-dk-green pad-t-2 pad-s-1 pad-b-8 mar-b-16 c-white">
-    <div class="max-w-700 center">
+<div class="container">
+    <div class="">
         {{{body}}}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

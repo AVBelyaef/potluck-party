@@ -1,6 +1,7 @@
 const update = document.querySelector('.update');
 update && update.addEventListener('click', async (event) => {
   event.preventDefault();
+  // debugger
   await fetch(`/party/${event.target.id}`, {
     method: 'PUT',
     headers: {
@@ -8,13 +9,12 @@ update && update.addEventListener('click', async (event) => {
     },
     body: JSON.stringify({
       id: event.target.id,
-      title: event.target.parentNode[0].value,
-      body: event.target.parentNode[1].value,
+      name: event.target.parentNode[0].value,
+      location: event.target.parentNode[1].value,
       startsAt: event.target.parentNode[2].value,
-
     })
   });
-  window.location = 'http://localhost:3000/party';
+  window.location = '/party';
 });
 
 
@@ -30,5 +30,5 @@ deleteEntry && deleteEntry.addEventListener('click', async (event) => {
       id: event.target.id
     })
   });
-  window.location = 'http://localhost:3000/party';
+  window.location = '/party';
 });

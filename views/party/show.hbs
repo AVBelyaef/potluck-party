@@ -1,20 +1,37 @@
-<h1>{{party.name}}</h1>
+<div class="d-flex justify-content-around flex-wrap">
+    <div class="jumbotron h-100">
+        <h1 class="display-3">{{party.name}}</h1>
+        <hr class="my-2">
+        <p class="lead text-muted">Creator by {{party.creator}}</p>
+        <p class="lead"><i class="far fa-calendar-check"></i> {{party.startsAt}}</p>
+        <p class="lead"><i class="fas fa-map-marker-alt"></i> {{party.location}}</p>
+        <p class="lead"><i class="fas fa-user"></i> {{party.join.length}}</p>
+        <hr class="my-2">
+        {{#if isCreator}}
+            <div class="mt-4">
+                <a href="/party/{{ party.id }}/edit" class="btn btn-primary">edit</a>
 
-<span class="party-date block font-3-4 c-lt-gray">Starts at {{party.startsAt}} <br />
-    creator by
-    <a href="/users/{{party._id}}/party?author={{party.creator}}"> {{party.creator}}</a>
-</span>
+                <a href="/party/{{ party.id }}" id="{{party.id}}" class="btn btn-primary ml-2 delete">delete</a>
+            </div>
+        {{else}}
+            {{#if isAuth }}
+                {{#if isJoin }}
+                    <a href="/party/{{ party.id }}/join" class="btn btn-primary mt-3">JOIN</a>
+                {{/if}}
+            {{/if}}
+        {{/if}}
 
+    </div>
+    <div class="d-flex flex-column">
+        {{#each party.join}}
 
-{{#if isCreator}}
-    <ul class="no-bullets no-padding mar-t-2">
-        <li class="pipe-separate left">
-            <a href="/party/{{ party.id }}/edit" class="c-white">edit</a>
-        </li>
-
-        <li class="pipe-separate left">
-            <a href="/party/{{ party.id }}"  id="{{party.id}}" class="c-white delete" >delete</a>
-        </li>
-    </ul>
-
-{{/if}}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p>User: {{this.name}}</p>
+                    <hr class="my-2">
+                    <p>bring {{this.bring}}</p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

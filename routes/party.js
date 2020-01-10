@@ -1,92 +1,100 @@
 const express = require('express');
 const router = express.Router();
 const Party = require('../models/party');
-
+const moment = require('moment');
+const { sessionChecker } = require('../middleware/auth');
 console.log('Погналиииииии!!!!');
 
 // party
-router.get('/', async function (req, res, next) {
-  let party = await Party.mostRecent();
-  // const party = await Party.find()
-  // console.log(party);
-  // res.send('hi')
-  res.render('party/index', { party });
-  // res.render('party/index');
-});
+router
+  .route('/')
+  .get(async function (req, res, next) {
+    let party = await Party.mostRecent(); //TODO: дата не работает с массивом???
+    // party.forEach((p) => {p.startsAt = moment(p.startsAt).format('L')});
+    // party.forEach((p) => {p.startsAt = moment(p.startsAt).format('L');
+    // console.log(moment(p.startsAt).format('L'))});
+    // // party[0].startsAt = moment(party[0].startsAt).format('L');
 
-router.post('/', async function (req, res, next) {
-  // console.log(req.body);
-  // console.log(req.session);
+    res.render('party/index', { party });
+    // res.render('party/index');
+  })
 
-  const newParty = new Party({
-    name: req.body.name,
-    location: req.body.location,
-    startsAt: req.body.startsAt,
-    creator: req.session.user.username
+  .post(async function (req, res, next) {
+    console.log(req.body)
+    const newParty = new Party({
+      name: req.body.name,
+      location: req.body.location,
+      startsAt: req.body.startsAt,
+      creator: req.session.user.username,
+    });
+    await newParty.save();
+    res.redirect(`/party/${newParty.id}`);
   });
-  await newParty.save();
-  res.redirect(`/party/${newParty.id}`);
-});
 
 //new party
-router.get('/new', function (req, res, next) {
-  // console.log(req.body);
+router.get('/new', sessionChecker, function (req, res) {
   res.render('party/new');
 });
 
-// render signup handle bars
-router.get('/signup', (req, res) => {
-  const message = req.session.message;
-  delete req.session.message;
-  res.render('signup', { message });
-});
-
-router.get('/login', (req, res) => {
-  const message = req.session.message;
-  delete req.session.message;
-  res.render('login', { message });
-});
-
-router.get('/creator', async (req, res) => {
-  const party = await Party.find({ creator: req.session.user.username });
-  res.render('party/index', { party });
-});
-
 //detail party
-router.get('/:id', async function (req, res, next) {
-  let isCreator = false;
+router
+  .route('/:id')
+  .get(sessionChecker, async function (req, res, next) {
+    let isCreator = false;
+    let party = await Party.findById(req.params.id);
+    // party.startsAt = moment(party.startsAt).format('L');  // если объкт, то moment не работает?
+    let isJoin = true;
+    if (req.session.user && party.creator === req.session.user.username) {
+      isCreator = true;
+      res.render('party/show', { party, isCreator });
+    } else if (req.session.user && party.join.some(join => join.name === req.session.user.username)) {
+      isJoin = false;
+      res.render('party/show', { party, isJoin });
+    } else {
+      res.render('party/show', { party, isJoin });
+    }
+  })
+
+  .put(sessionChecker, async function (req, res, next) {
+    let party = await Party.findById(req.body.id);
+    party.name = req.body.name;
+    party.location = req.body.location;
+    party.startsAt = req.body.startsAt;
+    await party.save();
+    res.end();
+  })
+
+  .delete(sessionChecker, async function (req, res, next) {
+    await Party.deleteOne({ '_id': req.params.id });
+    res.end();
+  });
+
+// edit party
+router.get('/:id/edit', sessionChecker, async function (req, res, next) {
   let party = await Party.findById(req.params.id);
-  if (req.session.user && party.creator === req.session.user.username) {
-    isCreator = true;
-    res.render('party/show', { party, isCreator });
-  } else {
-    party.creator = party.creator;
-    res.render('party/show', { party });
-  }
-
+  const startsAtFormatHTML5 = moment(party.startsAt).format(moment.HTML5_FMT.DATETIME_LOCAL);
+  res.render('party/edit', { party, startsAtFormatHTML5 });
 });
 
-router.put('/:id', async function (req, res, next) {
-  // let party = await Party.findById(req.params.id);
-  let party = await Party.findById(req.body.id);
-  console.log(party, '........................................................');
-  party.name = req.body.name;
-  party.locarion = req.body.locarion;
-  party.startsAt = req.body.startsAt;
+// join party
+router
+  .route('/:id/join')
+  .get(sessionChecker, (req, res) => {
+    const party = {};
+    party.id = req.params.id;
+    res.render('party/join', { party });
+  })
 
-  await party.save();
-  res.end();
-});
+  .post(async (req, res) => {
+    let party = await Party.findById(req.params.id);
+    party.join.push({
+      name: req.session.user.username,
+      bring: req.body.bring
+    });
+    await party.save();
+    res.redirect(`/party/${req.params.id}`);
+  });
 
-router.delete('/:id', async function (req, res, next) {
-  await Party.deleteOne({ '_id': req.params.id });
-  res.redirect('/');
-});
-
-router.get('/:id/edit', async function (req, res, next) {
-  let party = await Party.findById(req.params.id);
-  res.render('party/edit', { party });
-});
 
 module.exports = router;
 

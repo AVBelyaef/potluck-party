@@ -1,8 +1,9 @@
 <div class="container">
-    <h2>Sign up</h2>
     <div class="card m-3 p-4">
+    <h2>Sign up</h2>
+
         {{#if message}}
-            <p style="color: red;">{{this.message}}</p>
+            <p class="text-danger">{{this.message}}</p>
         {{/if}}
         <form action="/signup" method="POST">
             <div class="form-group">
@@ -18,7 +19,7 @@
                 <input class="border form-control" type="password" name="password" required/>
             </div>
             <div>
-                <input class="btn btn-info" type="submit" value="Sign Up"/>
+                <input class="btn btn-primary" type="submit" value="Sign Up"/>
             </div>
         </form>
     </div>
