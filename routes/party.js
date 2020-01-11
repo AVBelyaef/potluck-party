@@ -20,9 +20,8 @@ router
   })
 
   .post(async function (req, res, next) {
-    console.log(req.body)
     const newParty = new Party({
-      name: req.body.name,
+      name: req.body.name.toUpperCase(),
       location: req.body.location,
       startsAt: req.body.startsAt,
       creator: req.session.user.username,
@@ -55,7 +54,7 @@ router
     }
   })
 
-  .put(sessionChecker, async function (req, res, next) {
+  .put(sessionChecker, async function (req, res) {
     let party = await Party.findById(req.body.id);
     party.name = req.body.name;
     party.location = req.body.location;

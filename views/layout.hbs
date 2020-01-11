@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script defer src="/js/application.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,8 +13,13 @@
 </head>
 <body>
 <header role="banner" class="container">
-    <div class="">
-        <nav class="d-flex justify-content-end navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="d-flex justify-content-end navbar navbar-expand-lg navbar-dark bg-primary">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
 
                 {{#if isAuth}}
@@ -27,14 +33,13 @@
 
                 <li class="nav-item "><a class="nav-link" href="/">PARTY</a></li>
             </ul>
-        </nav>
-
-<!--        <div class="text-center" style="border: solid 2px #45b9e1; border-radius: 50%;">-->
-        <div class="text-center">
-            <img class="img-fluid" style="width: 15%;"src="/images/logo.png">
-            <h1 style="font-family: 'Indie Flower', cursive;">Potluck Party</h1>
         </div>
+    </nav>
+    <div class="text-center">
+        <img class="img-fluid" style="width: 15%;" src="/images/logo.png">
+        <h1 style="font-family: 'Indie Flower', cursive;">Potluck Party</h1>
     </div>
+
 </header>
 <div class="container">
     <div class="">

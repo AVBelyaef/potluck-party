@@ -10,30 +10,6 @@
         </ul>
     {{/if}}
 
-
-    <!--   <form method="post" action="/party" >
-        <div class="form-group">
-            <label>Name:</label>
-            <input required name="name" type="text" value="{{party.name}}" tabindex="1"
-                   class="border form-control">
-        </div>
-        <div class="form-group">
-            <label>location:</label>
-            <input required name="location" type="text" value="{{party.location}}" tabindex="2"
-                   class="border form-control">
-        </div>
-        <div class="form-group">
-            <label>startsAt:</label>
-            <input required id="title-input" name="startsAt" type="datetime-local"
-                   value="{{party.startsAt}}" tabindex="1" class="border form-control">
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" tabindex="3"
-                   class="btn btn-info update">
-        </div>
-    </form>
-</div>-->
-
     <form method="post" action="/party">
         <label class="mt-3">Name:</label>
         <input required name="name" type="text" value="{{party.name}}" tabindex="1"
@@ -48,6 +24,6 @@
                value="{{party.startsAt}}" tabindex="1" class="border form-control">
 
         <input type="submit" value="Create a party" tabindex="3"
-               class="btn btn-primary mt-3 update">
+               class="btn btn-primary mt-3 ">
     </form>
 </div>

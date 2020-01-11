@@ -1,10 +1,11 @@
 <div class="container">
     <div class="card m-3 p-4">
-    <h2>Come to the party!</h2>
+        <h1>Come to the party!</h1>
 
         {{#if message}}
             <p class="text-danger">{{this.message}}</p>
         {{/if}}
+
         <form action="/login" method="POST">
             <div class="form-group">
                 <label>Username:</label>
@@ -19,5 +20,4 @@
             </div>
         </form>
     </div>
-
 </div>
