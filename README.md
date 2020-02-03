@@ -1,6 +1,6 @@
 # Potluck Party 
 
-Potluck Party - приложение для организации вечеринок, пользователи могут устраивать вечеринки у себя, и присоединяться к другим вечеринкам.
+Potluck Party - приложение для организации вечеринок, пользователи могут устраивать вечеринки у себя, и присоединяться к другим вечеринкам. Проект на heroku [http://potluck-party.herokuapp.com/](http://potluck-party.herokuapp.com/)
 
 ![Demo Potluck Party](readme/party_fun_and_games.jpg "Demo Potluck Party")
 ---
