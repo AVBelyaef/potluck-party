@@ -9,14 +9,13 @@ console.log('Погналиииииии!!!!');
 router
   .route('/')
   .get(async function (req, res, next) {
-    let party = await Party.mostRecent(); //TODO: дата не работает с массивом???
-    // party.forEach((p) => {p.startsAt = moment(p.startsAt).format('L')});
-    // party.forEach((p) => {p.startsAt = moment(p.startsAt).format('L');
-    // console.log(moment(p.startsAt).format('L'))});
-    // // party[0].startsAt = moment(party[0].startsAt).format('L');
-
+    let party = await Party.mostRecent();
+    party = party.map((p) => {
+      p = p.toObject();
+      p.startsAt = moment(p.startsAt).format('Do MMMM YYYY, h:mm a');
+      return p;
+    });
     res.render('party/index', { party });
-    // res.render('party/index');
   })
 
   .post(async function (req, res, next) {
@@ -41,8 +40,11 @@ router
   .get(sessionChecker, async function (req, res, next) {
     let isCreator = false;
     let party = await Party.findById(req.params.id);
-    // party.startsAt = moment(party.startsAt).format('L');  // если объкт, то moment не работает?
     let isJoin = true;
+    party = party.toObject();
+    party.startsAt = moment(party.startsAt).format('Do MMMM YYYY, h:mm a');
+
+
     if (req.session.user && party.creator === req.session.user.username) {
       isCreator = true;
       res.render('party/show', { party, isCreator });

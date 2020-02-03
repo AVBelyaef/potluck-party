@@ -9,14 +9,14 @@
         <hr class="my-2">
         {{#if isCreator}}
             <div class="mt-4">
-                <a href="/party/{{ party.id }}/edit" class="btn btn-primary">edit</a>
+                <a href="/party/{{ party._id }}/edit" class="btn btn-primary">edit</a>
 
-                <a href="/party/{{ party.id }}" id="{{party.id}}" class="btn btn-primary ml-2 delete">delete</a>
+                <a href="/party/{{ party._id }}" id="{{party._id}}" class="btn btn-primary ml-2 delete">delete</a>
             </div>
         {{else}}
             {{#if isAuth }}
                 {{#if isJoin }}
-                    <a href="/party/{{ party.id }}/join" class="btn btn-primary mt-3">JOIN</a>
+                    <a href="/party/{{ party._id }}/join" class="btn btn-primary mt-3">JOIN</a>
                 {{/if}}
             {{/if}}
         {{/if}}

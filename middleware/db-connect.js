@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-// mongoose.connect('mongodb://localhost:27017/potluckParty', {useUnifiedTopology: true, useNewUrlParser: true});
+require('dotenv').config();
+
 const db = process.env.MONGODB_URL;
 
 mongoose.connect(db, {
